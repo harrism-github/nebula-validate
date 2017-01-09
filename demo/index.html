@@ -1,0 +1,150 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>nebula-routing demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../nebula-validate.html">
+    <style is="custom-style" include="demo-pages-shared-styles">
+      iron-pages {
+        margin-top: 20px;
+        height: 1rem;
+      }
+      input {
+        display: block;
+        width: auto;
+        padding: 4px;
+        margin: 4px 0;
+        width: calc(100% - 8px);
+      }
+      ul.errors {
+        color: red;
+        padding: 0;
+        margin: 4px 0;
+      }
+      ul.errors li {
+        list-style: none;
+        font-size: 0.9rem;
+        font-variant: small-caps;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Field Validation (Grouped Format, Auto Validate)</h3>
+      <demo-snippet>
+        <template is="dom-bind" id="FieldDemo">
+          <nebula-validate
+            constraints="[[constraints]]"
+            data="[[data]]"
+            format="grouped"
+            errors="{{errors}}" auto-validate>
+          </nebula-validate>
+          
+          <input type="text" placeholder="Email address" value="{{data.email::input}}" novalidate></input>
+          <ul class="errors">
+            <template is="dom-repeat" items="[[errors.email]]">
+              <li>[[item]]</li>
+            </template>
+          </ul>
+         
+          <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
+          <ul class="errors">
+            <template is="dom-repeat" items="[[errors.password]]">
+              <li>[[item]]</li>
+            </template>
+          </ul>
+        </template>
+        <script>
+          FieldDemo.data = {
+            email: null,
+            password: null
+          }
+          FieldDemo.constraints = {            
+            email: { presence: true, email: true },
+            password: { presence: true }
+          }
+        </script>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Form Validation (Flat Format, Auto Validate)</h3>
+      <demo-snippet>
+        <template is="dom-bind" id="FormDemo">
+          <nebula-validate
+            constraints="[[constraints]]"
+            data="[[data]]"
+            format="flat"
+            errors="{{errors}}" auto-validate>
+          </nebula-validate>
+          
+          <input type="text" placeholder="Email address" value="{{data.email::input}}" novalidate></input>
+          <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
+
+          <ul class="errors">
+            <template is="dom-repeat" items="[[errors]]">
+              <li>[[item]]</li>
+            </template>
+          </ul>
+        </template>
+        <script>
+          FormDemo.data = {
+            email: null,
+            password: null
+          }
+          FormDemo.constraints = {            
+            email: { presence: true, email: true },
+            password: { presence: true }
+          }
+        </script>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Form Validation (No Auto Validate)</h3>
+      <demo-snippet>
+        <template is="dom-bind" id="ManualDemo">
+          <nebula-validate
+            id="validator"
+            constraints="[[constraints]]"
+            data="[[data]]"
+            format="flat"
+            errors="{{errors}}">
+          </nebula-validate>
+          
+          <input type="text" placeholder="Email address" value="{{data.email::input}}" novalidate></input>
+          <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
+
+          <ul class="errors">
+            <template is="dom-repeat" items="[[errors]]">
+              <li>[[item]]</li>
+            </template>
+          </ul>
+
+          <button onclick="validator.validate()">Submit</button>
+        </template>
+        <script>
+          ManualDemo.data = {
+            email: null,
+            password: null
+          }
+          ManualDemo.constraints = {            
+            email: { presence: true, email: true },
+            password: { presence: true }
+          }
+        </script>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>

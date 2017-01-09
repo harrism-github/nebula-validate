@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>nebula-route</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../nebula-validate.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <nebula-validate auto-validate></nebula-validate>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('basic', function() {
+        var el
+        setup(function() {
+          el = fixture('basic')
+        })
+        test('element is created', function() {
+          assert.equal(el.is, 'nebula-validate')
+        })
+        test('data fails validation', function() {
+          el.constraints = {
+            test: {presence: true}
+          }
+          el.data = {}
+          el.validate()
+          assert.isOk(el.errors)
+        })
+        test('data passes validation', function() {
+          el.constraints = {
+            test: {presence: true}
+          }
+          el.data = {test: 'test'}
+          el.validate()
+          assert.isNotOk(el.errors)
+        })
+      })
+
+    </script>
+  </body>
+</html>

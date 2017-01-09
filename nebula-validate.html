@@ -1,0 +1,131 @@
+<!--
+@license
+Copyright (c) 2017 Ars Nebula LLC.
+This code may be used under the terms found in LICENSE.md of this repository.
+-->
+
+<script src="../validate/validate.min.js"></script>
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`<nebula-validate>` is a custom element that provides data validation using [Validate.js](https://validatejs.org/). It provides an easy but extensible way to implement form and other types of data validation.
+
+<b>Constraints</b>
+
+Data is validated against constraints. The constraints object can specify one or more validation rules for a field.
+
+```js
+var constraints = {
+  email: {
+    presence: true,
+    email: true
+  },
+  password: {
+    presence: true
+  }
+}
+```
+
+The library includes a collection of built-in validators and errors messages. Error messages can be customized, and you can also define custom validators for validating single, or multiple fields. Constraints can also be specified for child objects.
+
+> <i>For more information, see the [Validate.js](https://validatejs.org/#constraints) documentation.</i>
+
+<b>Format</b>
+
+The validation results stored in the `errors` property can be saved in one of multiple formats. The default format is **grouped**, which stores on object containing an array of errors for each field keyed by the fieldname. If format is set to **flat**, the errors property will contain an array of error messages. Lastly, the **detailed** format will store validation errors as an array of verbose information related to each validation failure.
+
+If validation succeeds, the `errors` property will be **null**.
+
+<b>Auto Validation</b>
+
+If the `autoValidate` property is **true**, then validation is performed automatically whenever the data is changed.
+
+When data binding to input fields, you can also set an optional `delay`, which will debounce the validation for the specified number of milliseconds. By default, auto validation is **false**.
+
+@demo demo/index.html
+-->
+
+<script>
+  Polymer({
+    is: 'nebula-validate',
+    hostAttributes: {
+      'hidden': true
+    },
+    properties: {
+      /**
+       * The constraints used to validate the data. <i>For more information, see the [validate.js](https://validatejs.org) documentation.</i>
+       */
+      constraints: {
+        type: Object,
+      },
+      /**
+       * The data to validate against the constraints.
+       */
+      data: {
+        type: Object,
+      },
+      /**
+       * True to validate the data when it changes, otherwise false.
+       */
+      autoValidate: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * A debounce value to delay auto validation when the data is changed.
+       */
+      delay: {
+        type: Number,
+        value: 0
+      },
+      /**
+       * The format option for errors (grouped, flat or detailed). <i>For more information, see the [validate.js](https://validatejs.org) documentation.</i>
+       */
+      format: {
+        type: String,
+        value: 'grouped'
+      },
+      /**
+       * The validation results. If the format is grouped, then results will be an object keyed by field, otherwise an array.
+       */
+      errors: {
+        type: Object,
+        notify: true
+      }
+    },
+    observers: [
+      '_onChange(constraints.*, data.*, autoValidate)'
+    ],
+    /**
+     * Triggers validation if constraints or data are modified.
+     */
+    _onChange() {
+      if (this.constraints && this.data && this.autoValidate) {
+        this.debounce('change', function() {
+          this.validate()
+        }.bind(this), this.delay)
+      }
+    },
+    /**
+     * Fired when validation is completed.
+     *
+     * @event validated
+     */
+    _fireValidated(detail) {
+      this.fire('validated', detail, {bubbles: false})
+    },    
+    /**
+     * Validates the current data against the constraints, and sets the errors property with the results.
+     */
+    validate() {
+      var options = {
+        format: (this.format) ? this.format : 'grouped'
+      }
+      var errors = validate(this.data, this.constraints, options)
+
+      this.set('errors', errors)
+      this._fireValidated(errors)
+      return errors
+    }
+  })
+</script>
