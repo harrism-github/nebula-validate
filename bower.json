@@ -1,11 +1,11 @@
 {
   "name": "nebula-validate",
-  "description": "Web component (built with Polymer) to support data validation.",
+  "description": "Web component to support form and data validation.",
   "license": "ISC",
   "authors": [
     "Chris Beckett <chrisb@arsnebula.com>"
   ],
-  "homepage": "https://github.com/arsnebula/nebula-i18n#README",
+  "homepage": "https://github.com/arsnebula/nebula-validate#README",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,7 +15,8 @@
   "keywords": [
     "polymer",
     "web-components",
-    "validation"
+    "validation",
+    "form"
   ],
   "main": "nebula-validate.html",
   "dependencies": {

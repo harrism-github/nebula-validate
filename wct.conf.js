@@ -3,7 +3,7 @@ module.exports = {
   persistent: false,
   plugins: {
     local: {
-      browsers: ['chrome', 'firefox']
+      browsers: ['chrome', 'firefox', 'ie']
     }
   },
 };
