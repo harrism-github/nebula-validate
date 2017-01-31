@@ -1,6 +1,6 @@
 {
   "name": "nebula-validate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Web component to support form and data validation.",
   "private": true,
   "license": "ISC",
