@@ -1,4 +1,7 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/arsnebula/nebula-validate)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/arsnebula/nebula-validate)
+
+[![Build Status](https://saucelabs.com/browser-matrix/arsnebula.svg)](https://saucelabs.com/beta/builds/5695f4cfba8843ff85ed38c385bcab42)
+
 # \<nebula-validate\>
 
 Web component (built with Polymer) to support data validation.
@@ -30,7 +33,7 @@ Add the element and set properties:
 </nebula-validate>
 ```
 
-If using auto validation, then valdiation will be performed whenever the data changes. Validation can also be done manually:
+By default, the `autoValidate` property is false. To trigger validation, call the `validate` method.
 
 ```js
   this.$.validator.validate()

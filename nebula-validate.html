@@ -98,17 +98,17 @@ When data binding to input fields, you can also set an optional `delay`, which w
       }
     },
     observers: [
-      '_onChange(constraints.*, data.*, autoValidate)'
+      '_onChange(constraints.*, data.*)'
     ],
     /**
     * Triggers validation if constraints or data are modified.
     */
     _onChange: function() {
-      if (this.constraints && this.data && this.autoValidate) {
-        this.debounce('change', function() {
-          this.validate()
-        }.bind(this), this.delay)
-      }
+      if (!(this.constraints && this.data)) return
+      if (this.autoValidate === false) return
+      this.debounce('change', function() {
+        this.validate()
+      }.bind(this), this.delay)
     },
     /**
     * Validates the current data against the constraints, and sets the errors property with the results.

@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.0.3](https://github.com/arsnebula/nebula-validate/releases/tag/v1.0.3) (2017-02-25)
+
+- Modified property change observer to remove autoValidate property.
+
 ## [v1.0.2](https://github.com/arsnebula/nebula-validate/releases/tag/v1.0.2) (2017-01-30)
 
 - Fixed bower dependency for validate.js to full org/repo.

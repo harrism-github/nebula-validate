@@ -14,9 +14,15 @@
   ],
   "keywords": [
     "polymer",
+    "element",
+    "webcomponent",
+    "web-component",
+    "webcomponents",
     "web-components",
-    "validation",
-    "form"
+    "form",
+    "forms",
+    "data",
+    "validation"
   ],
   "main": "nebula-validate.html",
   "dependencies": {
@@ -26,7 +32,8 @@
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
-    "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "web-component-tester": "Polymer/web-component-tester#^5.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.4.0"
   }
 }
