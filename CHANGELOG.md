@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.0.0](https://github.com/arsnebula/nebula-validate/releases/tag/v2.0.0) (2017-04-20)
+
+- Upgraded element to a Polymer v2 ES2105 class-style element.
+
 ## [v1.0.3](https://github.com/arsnebula/nebula-validate/releases/tag/v1.0.3) (2017-02-25)
 
 - Modified property change observer to remove autoValidate property.

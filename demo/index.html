@@ -1,48 +1,58 @@
 <!doctype html>
-
 <html>
   <head>
     <title>nebula-validate</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-repeat.html">
     <link rel="import" href="../nebula-validate.html">
-    <style is="custom-style" include="demo-pages-shared-styles">
-      iron-pages {
-        margin-top: 20px;
-        height: 1rem;
-      }
-      input {
-        display: block;
-        width: auto;
-        padding: 4px;
-        margin: 4px 0;
-        width: calc(100% - 8px);
-      }
-      ul.errors {
-        color: red;
-        padding: 0;
-        margin: 4px 0;
-      }
-      ul.errors li {
-        list-style: none;
-        font-size: 0.9rem;
-        font-variant: small-caps;
-      }
-      button {
-        width: 100%;
-        padding: 8px;
-      }
-    </style>
+    <custom-style>
+      <style>
+        body {
+          font-family: sans-serif;
+          font-size: 14px;
+          margin: 0;
+          padding: 16px;
+          background-color:white;          
+        }
+        demo-snippet {
+          display: block;
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          padding: 8px 16px;
+          margin-bottom: 40px;
+        }
+        input {
+          display: block;
+          width: auto;
+          padding: 4px;
+          margin: 4px 0;
+          width: calc(100% - 8px);
+        }
+        ul.errors {
+          color: red;
+          padding: 0;
+          margin: 4px 0;
+        }
+        ul.errors li {
+          list-style: none;
+          font-size: 0.9rem;
+          font-variant: small-caps;
+        }
+        button {
+          width: 100%;
+          padding: 8px;
+        }
+      </style>
+    </custom-style>
   </head>
   <body>
 
-    <div class="vertical-section-container">
-      <h3>Field Validation (Grouped Format, Auto Validate)</h3>
-      <demo-snippet>
-        <template is="dom-bind" id="FieldDemo">
+    <h3>Field Validation (Grouped Format, Auto Validate)</h3>
+    <demo-snippet>
+      <dom-bind id="FieldDemo">
+        <template>
           <nebula-validate
             constraints="[[constraints]]"
             data="[[data]]"
@@ -56,31 +66,34 @@
               <li>[[item]]</li>
             </template>
           </ul>
-         
+        
           <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
           <ul class="errors">
-            <template is="dom-repeat" items="[[errors.password]]">
-              <li>[[item]]</li>
-            </template>
+            <dom-repeat items="[[errors.password]]">
+              <template>
+                <li>[[item]]</li>
+              </template>
+            </dom-repeat>
           </ul>
         </template>
-        <script>
-          FieldDemo.data = {
-            email: null,
-            password: null
-          }
-          FieldDemo.constraints = {            
-            email: { presence: true, email: true },
-            password: { presence: true }
-          }
-        </script>
-      </demo-snippet>
-    </div>
+      </dom-bind>
+    </demo-snippet>
 
-    <div class="vertical-section-container">
-      <h3>Form Validation (Flat Format, Auto Validate)</h3>
-      <demo-snippet>
-        <template is="dom-bind" id="FormDemo">
+    <script>
+      FieldDemo.data = {
+        email: null,
+        password: null
+      }
+      FieldDemo.constraints = {            
+        email: { presence: true, email: true },
+        password: { presence: true }
+      }
+    </script>
+
+    <h3>Form Validation (Flat Format, Auto Validate)</h3>
+    <demo-snippet>
+      <dom-bind id="FormDemo">
+        <template>
           <nebula-validate
             constraints="[[constraints]]"
             data="[[data]]"
@@ -92,28 +105,31 @@
           <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
 
           <ul class="errors">
-            <template is="dom-repeat" items="[[errors]]">
-              <li>[[item]]</li>
-            </template>
+            <dom-repeat items="[[errors]]">
+              <template>
+                <li>[[item]]</li>
+              </template>
+            </dom-repeat>
           </ul>
         </template>
-        <script>
-          FormDemo.data = {
-            email: null,
-            password: null
-          }
-          FormDemo.constraints = {            
-            email: { presence: true, email: true },
-            password: { presence: true }
-          }
-        </script>
-      </demo-snippet>
-    </div>
+      </dom-bind>
+    </demo-snippet>
 
-    <div class="vertical-section-container">
-      <h3>Form Validation (No Auto Validate)</h3>
-      <demo-snippet>
-        <template is="dom-bind" id="ManualDemo">
+    <script>
+      FormDemo.data = {
+        email: null,
+        password: null
+      }
+      FormDemo.constraints = {            
+        email: { presence: true, email: true },
+        password: { presence: true }
+      }
+    </script>
+
+    <h3>Form Validation (No Auto Validate)</h3>
+    <demo-snippet>
+      <dom-bind id="ManualDemo">
+        <template>
           <nebula-validate
             id="validator"
             constraints="[[constraints]]"
@@ -126,25 +142,28 @@
           <input type="text" placeholder="Password" value="{{data.password::input}}" novalidate></input>
 
           <ul class="errors">
-            <template is="dom-repeat" items="[[errors]]">
-              <li>[[item]]</li>
-            </template>
+            <dom-repeat items="[[errors]]">
+              <template>
+                <li>[[item]]</li>
+              </template>
+            </dom-repeat>
           </ul>
 
           <button onclick="validator.validate()">Submit</button>
         </template>
-        <script>
-          ManualDemo.data = {
-            email: null,
-            password: null
-          }
-          ManualDemo.constraints = {            
-            email: { presence: true, email: true },
-            password: { presence: true }
-          }
-        </script>
-      </demo-snippet>
-    </div>
+      </dom-bind>
+    </demo-snippet>
+
+    <script>
+      ManualDemo.data = {
+        email: null,
+        password: null
+      }
+      ManualDemo.constraints = {            
+        email: { presence: true, email: true },
+        password: { presence: true }
+      }
+    </script>
 
   </body>
 </html>

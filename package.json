@@ -1,37 +1,20 @@
 {
   "name": "nebula-validate",
-  "version": "1.0.3",
-  "description": "Web component to support form and data validation.",
+  "version": "2.0.0",
+  "description": "Validate forms and data with Validate.js",
   "private": true,
   "license": "ISC",
   "author": "Chris Beckett <chrisb@arsnebula.com>",
   "homepage": "https://github.com/arsnebula/nebula-validate",
-  "bugs": {
-    "url": "https://github.com/arsnebula/nebula-validate/issues",
-    "email": "support@arsnebula.com"
-  },
   "repository": "arsnebula/nebula-validate",
-  "keywords": [
-    "polymer",
-    "element",
-    "webcomponent",
-    "web-component",
-    "webcomponents",
-    "web-components",
-    "form",
-    "forms",
-    "data",
-    "validation"
-  ],
   "scripts": {
     "test": "wct --plugin=local",
     "test:debug": "wct --plugin=local --persistent=true",
-    "test:sauce": "wct --plugin=sauce --sauce-username=arsnebula",
+    "test:sauce": "wct --plugin=sauce",
     "start": "browser-sync start -c bsconfig.js"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.6",
-    "minimist": "^1.2.0",
-    "web-component-tester": "^5.0.0"
+    "browser-sync": "latest",
+    "web-component-tester": "^6.0.0 || 6.0.0-prerelease.5"
   }
 }
