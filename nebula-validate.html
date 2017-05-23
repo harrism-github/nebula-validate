@@ -2,6 +2,32 @@
 <link rel="import" href="../nebula-element-mixin/nebula-element-mixin.html">
 <link rel="import" href="validate.html">
 
+<!--
+`<nebula-validate>` is a custom element that provides form and data validation using [Validate.js](https://validatejs.org/). It provides an easy but extensible way to implement form and other types of data validation.
+
+## Import
+
+```html
+<link rel="import" href="/bower_components/nebula-validate/nebula-validate.html">
+```
+
+## Usage
+
+Add the element.
+
+```html
+<nebula-validate
+  id="validator"
+  data="[[data]]"
+  auto-validate
+  delay=300
+  constraints="[[constraints]]"
+  errors="{{errors}}"
+  format="grouped">
+</nebula-validate>
+```
+
+-->
 <script>
 (function() {
   'use strict'
@@ -15,47 +41,58 @@
   const debounce = Symbol.for('Nebula.ElementMixin.debounce')
   const fire = Symbol.for('Nebula.ElementMixin.fire')
 
-  /**
-   * Validate forms and data with Validate.js
-   */
   class NebulaValidate extends Nebula.ElementMixin(Polymer.Element) {
 
     /**
-     * Gets the custom element name.
-     * @type {string}
+     * Gets the custom element tag name.
+     * @protected
+     * @ignore
      */
     static get is() { return 'nebula-validate' }
 
     /**
-     * Gets the property definitions for data binding.
-     * @type {Object}
-     * @property {Object} constraints - The constraints used to validate the data.
-     * @property {Object} data - The data to validate against the constraints.
-     * @property {boolean} autoValidate - Indicates if data is validated when changed.
-     * @property {number} delay - A debounce value to delay auto validation when the data is changed.
-     * @property {string} format - The format option for errors (grouped, flat or detailed).
-     * @property {Object} errors - The validation results; an object keyed by field (if format is grouped), otherwise an array.
+     * Gets the property definitions for Polymer data binding.
+     * @protected
+     * @ignore
      */
     static get properties() {
       return {
+        /**
+         * The constraints used to validate the data.
+         */
         constraints: {
           type: Object,
         },
+        /**
+         * The data to validate against the constraints.
+         */
         data: {
           type: Object,
         },
+        /**
+         * Indicates if data is validated when changed.
+         */        
         autoValidate: {
           type: Boolean,
           value: false
         },
+        /**
+         * A debounce value to delay auto validation when the data is changed.
+         */        
         delay: {
           type: Number,
           value: 0
         },
+        /**
+         * The format option for errors (grouped, flat or detailed).
+         */        
         format: {
           type: String,
           value: 'grouped'
         },
+        /**
+         * The validation results; an object keyed by field (if format is grouped), otherwise an array.
+         */        
         errors: {
           type: Object,
           notify: true
@@ -64,7 +101,7 @@
     }
 
     /**
-     * Lifecycle callback invoked when a new element instance is created.
+     * Creates a new instance of the custom element.
      */
     constructor() {
       super()
@@ -72,7 +109,8 @@
     }
 
     /**
-    * Lifecycle callback handler triggered when data-binding initialization is complete.
+    * The Polymer lifecycle callback triggered when the element is initialized.
+    * @protected
     */
     ready() {
       super.ready();
@@ -81,6 +119,9 @@
 
     /**
     * Property observer triggered if constraints or data are modified.
+    * @param {Object} constraints - Updated value of the constraints property.
+    * @param {data} data - Updated value of the data property.
+    * @private
     */
     [onPropsChanged](constraints, data) {
       if (!(constraints.value && data.value)) return
@@ -90,6 +131,7 @@
 
     /**
     * Validates the current data against the constraints, and sets the errors property with the results.
+    * @public
     */
     validate() {
       const options = {

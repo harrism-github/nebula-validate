@@ -1,6 +1,6 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-green.svg)](https://www.webcomponents.org/element/arsnebula/nebula-validate)
 [![Polymer Version](https://img.shields.io/badge/polymer-v2-blue.svg)](https://www.polymer-project.org)
-[![Sauce Labs Build Status](https://img.shields.io/badge/saucelabs-passing-red.svg)](https://saucelabs.com/beta/builds/3d9245061bd64ce1b6e22dcc7be6c575)
+[![Sauce Labs Build Status](https://img.shields.io/badge/saucelabs-passing-red.svg)](https://saucelabs.com/beta/builds/c59ef8816caf499cbadac377b083afb7)
 [![Gitter Chat](https://badges.gitter.im/org.png)](https://gitter.im/arsnebula/webcomponents)
 [![Become a Patreon](https://img.shields.io/badge/patreon-support_us-orange.svg)](https://www.patreon.com/arsnebula)
 
@@ -31,11 +31,12 @@ Add the element and set properties:
   delay=300
   constraints="[[constraints]]"
   data="[[data]]"
-  errors="{{errors}}">
+  errors="{{errors}}"
+  on-validated="_onValidated">
 </nebula-validate>
 ```
 
-By default, the `autoValidate` property is false. To trigger validation, call the `validate` method.
+By default, the `autoValidate` property is false. To trigger validation, enable the `autoValidate` property, or call the `validate` method directly.
 
 ```js
   this.$.validator.validate()

@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.0.1](https://github.com/arsnebula/nebula-validate/releases/tag/v2.0.1) (2017-05-23)
+
+- Removed manual documentation and updated inline comments for API document generation.
+
 ## [v2.0.0](https://github.com/arsnebula/nebula-validate/releases/tag/v2.0.0) (2017-04-20)
 
 - Upgraded element to a Polymer v2 ES2105 class-style element.
